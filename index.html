@@ -9,11 +9,11 @@
 <style>
   /* =====================================================================
      ★ 선물 수신자 화면 (화면 B) — re/index.html ★
-     링크 형식 (완강자 화면 버튼이 자동 생성):
-       인강 20% : https://studianclass.github.io/re/?code=쿠폰번호&exp=20260805
-       단어 30% : https://studianclass.github.io/re/?code=쿠폰번호&exp=20260805&t=v
-     - t=v 가 있으면 영어독립단어(블루) 버전으로 표시
-     - 없으면 스터디언 클래스 인강(골드) 버전으로 표시
+     링크 형식 (완강자 화면 버튼이 자동 생성, 짧은 형식):
+       인강 20% : https://studianclass.github.io/re/?c=쿠폰번호&e=20260905
+       단어 30% : https://studianclass.github.io/re/?c=쿠폰번호&e=20260905&t=v
+     - t=v 가 있으면 영어독립단어(블루) 버전, 없으면 인강(골드) 버전
+     - 이전 형식(?code=&exp=)도 계속 동작함
      ===================================================================== */
   :root{
     --navy-1:#070E22;
@@ -190,7 +190,7 @@
   /* ===================== 설정 ===================== */
   const CONFIG = {
     classRegisterUrl: "https://www.studianclass.com/sub/myPage/goCouponUserList",  // 인강: 쿠폰 등록 페이지
-    vocaRegisterUrl : "https://youngdok.com/membership",   // ★ 영어독립단어: 가입/쿠폰 등록 주소로 교체 ★
+    vocaRegisterUrl : "https://youngdok.com/membership",   // 영어독립단어: 쿠폰 등록 페이지
     logUrl: "",                                      // 클릭 기록용 Apps Script URL (추후 연결)
     defaultCode: "TEST12341234",
     deadlineISO: "2026-09-05T23:59:59+09:00"
@@ -198,7 +198,7 @@
   /* =============================================== */
 
   const params  = new URLSearchParams(location.search);
-  const rawCode = ((params.get("code") || CONFIG.defaultCode) || "").trim().toUpperCase().replace(/\s+/g,"");
+  const rawCode = ((params.get("c") || params.get("code") || CONFIG.defaultCode) || "").trim().toUpperCase().replace(/\s+/g,"");
   const isVoca  = (params.get("t") || "").toLowerCase() === "v";
   const TYPE    = isVoca ? "voca30" : "class20";
 
@@ -225,7 +225,7 @@
 
   /* ── 유효기간: ?exp=YYYYMMDD → KST 23:59:59 ── */
   function resolveDeadline(){
-    const raw = (params.get("exp") || "").trim().replace(/[.\/]/g,"-");
+    const raw = (params.get("e") || params.get("exp") || "").trim().replace(/[.\/]/g,"-");
     const m = raw.match(/^(\d{4})-?(\d{2})-?(\d{2})$/);
     if(m){
       const t = new Date(m[1]+"-"+m[2]+"-"+m[3]+"T23:59:59+09:00").getTime();
