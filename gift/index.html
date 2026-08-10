@@ -9,14 +9,14 @@
 <style>
   /* =====================================================================
      ★ 완강자용 선물함 (화면 A) — "졸업식 밤" 네이비 & 골드 ★
-     알림톡 링크 형식:
-       https://studianclass.github.io/gift/?c1=인강쿠폰1&c2=인강쿠폰2&v=단어쿠폰&exp=20260805
-     - c1, c2 : 인강 20% 선물권 쿠폰번호 2개
-     - v      : 영어독립단어 30% 선물권 쿠폰번호 1개
-     - exp    : 유효기간 (YYYYMMDD) → KST 23:59:59
-     선물 버튼 클릭 → 수신자 화면 링크 자동 생성·복사
-       인강:  {reBase}?code=...&exp=...
-       단어:  {reBase}?code=...&exp=...&t=v
+     알림톡 링크 형식 (압축형):
+       https://studianclass.github.io/gift/?k=인강쿠폰1.인강쿠폰2.단어쿠폰&exp=20260905
+     - k   : 쿠폰번호 3개를 점(.)으로 연결 → 순서: 인강1.인강2.단어
+     - exp : 유효기간 (YYYYMMDD) → KST 23:59:59 (완강일 기준, 사람마다 다름)
+     ※ 이전 형식(?c1=&c2=&v=)도 계속 동작함
+     선물 버튼 클릭 → 수신자 화면 링크 자동 생성·복사 (짧은 형식)
+       인강:  {reBase}?c=쿠폰번호&e=YYYYMMDD
+       단어:  {reBase}?c=쿠폰번호&e=YYYYMMDD&t=v
      ===================================================================== */
   :root{
     --navy-1:#070E22;      /* 배경 최하단 */
@@ -224,10 +224,12 @@
 
   const params = new URLSearchParams(location.search);
   const clean  = s => (s||"").trim().toUpperCase().replace(/\s+/g,"");
+  /* k=인강1.인강2.단어 (점으로 구분) 우선, 없으면 이전 형식 c1/c2/v, 그마저 없으면 샘플 */
+  const kParts = (params.get("k")||"").split(".").map(clean);
   const CODES = {
-    c1: clean(params.get("c1")) || CONFIG.sample.c1,
-    c2: clean(params.get("c2")) || CONFIG.sample.c2,
-    v : clean(params.get("v"))  || CONFIG.sample.v
+    c1: kParts[0] || clean(params.get("c1")) || CONFIG.sample.c1,
+    c2: kParts[1] || clean(params.get("c2")) || CONFIG.sample.c2,
+    v : kParts[2] || clean(params.get("v"))  || CONFIG.sample.v
   };
 
   function resolveDeadline(){
@@ -257,7 +259,7 @@
   logEvent("page_view","","");
 
   function giftLink(code, isVoca){
-    let url = CONFIG.reBase + "?code=" + encodeURIComponent(code) + "&exp=" + DL.raw;
+    let url = CONFIG.reBase + "?c=" + encodeURIComponent(code) + "&e=" + DL.raw;
     if(isVoca) url += "&t=v";
     return url;
   }
