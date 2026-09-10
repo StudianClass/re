@@ -10,13 +10,13 @@
   /* =====================================================================
      ★ 완강자용 선물함 (화면 A) — "졸업식 밤" 네이비 & 골드 ★
      알림톡 링크 형식 (압축형):
-       https://studianclass.github.io/gift/?k=인강쿠폰1.인강쿠폰2.단어쿠폰&exp=20260905
-     - k   : 쿠폰번호 3개를 점(.)으로 연결 → 순서: 인강1.인강2.단어
+       https://studianclass.github.io/re/gift/?k=인강쿠폰1.인강쿠폰2&exp=20260905
+     - k   : 인강 쿠폰번호 2개를 점(.)으로 연결
      - exp : 유효기간 (YYYYMMDD) → KST 23:59:59 (완강일 기준, 사람마다 다름)
      ※ 이전 형식(?c1=&c2=&v=)도 계속 동작함
-     선물 버튼 클릭 → 수신자 화면 링크 자동 생성·복사 (짧은 형식)
-       인강:  {reBase}?c=쿠폰번호&e=YYYYMMDD
-       단어:  {reBase}?c=쿠폰번호&e=YYYYMMDD&t=v
+     선물 버튼 클릭 → 수신자 화면 링크 자동 생성·복사
+       {reBase}?c=쿠폰번호&e=YYYYMMDD
+     ※ 영어독립단어 쿠폰은 이번 버전에서 제외 (되살릴 땐 t=v 분기 그대로 사용 가능)
      ===================================================================== */
   :root{
     --navy-1:#070E22;      /* 배경 최하단 */
@@ -152,11 +152,10 @@
 
     <p class="eyebrow">COURSE COMPLETED</p>
     <h1>완강을 축하드립니다! 🎉</h1>
-    <p class="sub">끝까지 해내는 사람은 생각보다 많지 않습니다.<br>오늘, 그걸 해내셨어요.</p>
 
     <div class="bridge">
-      <b>완강 기념, 선물할 수 있는 권한을 드려요</b>
-      <p>완강하신 분만 보낼 수 있는 선물입니다.<br>함께 영어 공부할 지인에게 전해 주세요.</p>
+      <b>완강 기념 선물할 수 있는 추가 쿠폰을 드려요</b>
+      <p>영어 여정을 함께할 지인에게 전해 주세요</p>
     </div>
 
     <!-- 인강 선물권 -->
@@ -167,32 +166,13 @@
         <span class="group__title">인강 20% 선물권</span>
         <span class="group__count">2장</span>
       </div>
-      <p class="group__desc">영어 회화, 혼자보다 둘이 오래 갑니다.</p>
+      <p class="group__desc">영어회화, 혼자보다 둘이 오래 갑니다.</p>
       <button class="btn btn--class" id="giftC1" data-key="gift_c1">
         친구 1에게 선물 링크 보내기
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
       </button>
       <button class="btn btn--class" id="giftC2" data-key="gift_c2">
         친구 2에게 선물 링크 보내기
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
-      </button>
-      <p class="hint">버튼을 누르면 링크가 복사됩니다. 카카오톡에 붙여넣어 전해 주세요.</p>
-    </section>
-
-    <!-- 영어독립단어 선물권 -->
-    <section class="group group--voca" aria-label="영어독립단어 할인 선물권">
-      <div class="group__brand">
-        <svg width="15" height="15" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M70.8385 14.1665L56.672 0H14.1665L0 14.1665V56.672L14.1665 70.8385H56.672L70.8385 56.672V14.1665ZM79.1615 14.1665L93.328 0H135.833L150 14.1665V56.672L135.833 70.8385H93.328L79.1615 56.672V14.1665ZM0 79.1615V150H70.8385V121.661H56.672V107.495H70.8385V79.1615H0ZM79.1615 93.328V79.1615H150V121.661H135.833V135.834H150V150H79.1615V107.495H93.328V93.328H79.1615Z" fill="#1E50FF"/></svg>
-        <span class="txt">영어독립단어</span>
-      </div>
-      <div class="group__head">
-        <span class="group__emoji">📘</span>
-        <span class="group__title">단어학습 30% 선물권</span>
-        <span class="group__count">1장</span>
-      </div>
-      <p class="group__desc">회화의 기초 체력은 단어에서 나옵니다.</p>
-      <button class="btn btn--voca" id="giftV" data-key="gift_v">
-        친구에게 선물 링크 보내기
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
       </button>
       <p class="hint">버튼을 누르면 링크가 복사됩니다. 카카오톡에 붙여넣어 전해 주세요.</p>
@@ -217,8 +197,8 @@
   const CONFIG = {
     reBase: "https://studianclass.github.io/re/",   // 수신자 화면 주소
     logUrl: "",                                      // 클릭 기록용 Apps Script URL (추후 연결)
-    sample: { c1:"CLASS111AAAA", c2:"CLASS222BBBB", v:"VOCA333CCCC" },  // 테스트용
-    deadlineISO: "2026-08-05T23:59:59+09:00"
+    sample: { c1:"CLASS111AAAA", c2:"CLASS222BBBB" },  // 테스트용
+    deadlineISO: "2026-12-31T23:59:59+09:00"
   };
   /* =============================================== */
 
@@ -228,8 +208,7 @@
   const kParts = (params.get("k")||"").split(".").map(clean);
   const CODES = {
     c1: kParts[0] || clean(params.get("c1")) || CONFIG.sample.c1,
-    c2: kParts[1] || clean(params.get("c2")) || CONFIG.sample.c2,
-    v : kParts[2] || clean(params.get("v"))  || CONFIG.sample.v
+    c2: kParts[1] || clean(params.get("c2")) || CONFIG.sample.c2
   };
 
   function resolveDeadline(){
@@ -297,22 +276,22 @@
   }
   bindGift("giftC1", CODES.c1, false, "gift_c1", "class20");
   bindGift("giftC2", CODES.c2, false, "gift_c2", "class20");
-  bindGift("giftV",  CODES.v,  true,  "gift_v",  "voca30");
 
   const timeEl = document.getElementById("time");
   document.getElementById("until").textContent = "유효기간 · " + expLabel + " (한국시간)";
   const pad = n => String(n).padStart(2,"0");
   function tick(){
     let diff = DL.ts - Date.now();
-    if(diff <= 0){ timeEl.textContent = "선물 기간이 종료되었습니다"; clearInterval(timer); return; }
+    if(diff <= 0){ timeEl.textContent = "선물 기간이 종료되었습니다"; if(timer) clearInterval(timer); return; }
     const d = Math.floor(diff/86400000); diff -= d*86400000;
     const h = Math.floor(diff/3600000);  diff -= h*3600000;
     const m = Math.floor(diff/60000);    diff -= m*60000;
     const s = Math.floor(diff/1000);
     timeEl.textContent = d+"일 "+pad(h)+"시간 "+pad(m)+"분 "+pad(s)+"초";
   }
+  let timer = null;
   tick();
-  const timer = setInterval(tick, 1000);
+  timer = setInterval(tick, 1000);
 
   /* ── 축하 콘페티: 골드·화이트·블루 (약 2.6초) ── */
   (function(){
@@ -320,7 +299,7 @@
     const cv = document.getElementById("confetti"), ctx = cv.getContext("2d");
     let W,H; const resize=()=>{W=cv.width=innerWidth*devicePixelRatio;H=cv.height=innerHeight*devicePixelRatio;};
     resize(); addEventListener("resize", resize);
-    const colors=["#F6C86A","#E0A23B","#FFFFFF","#1E50FF","#8FA6FF"];
+    const colors=["#F6C86A","#E0A23B","#FFFFFF","#F3D9A4"];
     const P=[]; const N=95;
     for(let i=0;i<N;i++){
       P.push({x:Math.random()*W, y:-Math.random()*H*.4, r:(4+Math.random()*5)*devicePixelRatio,
