@@ -146,8 +146,8 @@
 
     <section class="ticket">
       <div class="ticket__top">
-        <p class="ticket__gift" id="giftFrom">스터디언 클래스 · 완강 기념 선물</p>
-        <p class="ticket__deal" id="dealTitle">영어 회화 인강 20% 할인</p>
+        <p class="ticket__gift" id="giftFrom">스터디언 클래스 영어 강의</p>
+        <p class="ticket__deal" id="dealTitle">20% 할인 쿠폰</p>
         <p class="ticket__label">쿠폰번호</p>
         <div class="code" id="code">불러오는 중…</div>
       </div>
@@ -193,7 +193,7 @@
     vocaRegisterUrl : "https://youngdok.com/membership",   // 영어독립단어: 쿠폰 등록 페이지
     logUrl: "",                                      // 클릭 기록용 Apps Script URL (추후 연결)
     defaultCode: "TEST12341234",
-    deadlineISO: "2026-09-05T23:59:59+09:00"
+    deadlineISO: "2026-12-31T23:59:59+09:00"
   };
   /* =============================================== */
 
@@ -269,7 +269,7 @@
       countEl.classList.add("is-over");
       timeEl.textContent = "쿠폰 기간이 종료되었습니다";
       countEl.querySelector(".lbl").style.display = "none";
-      clearInterval(timer); return;
+      if(timer) clearInterval(timer); return;
     }
     const d = Math.floor(diff/86400000); diff -= d*86400000;
     const h = Math.floor(diff/3600000);  diff -= h*3600000;
@@ -277,8 +277,9 @@
     const s = Math.floor(diff/1000);
     timeEl.textContent = d+"일 "+pad(h)+"시간 "+pad(m)+"분 "+pad(s)+"초";
   }
+  let timer = null;
   tick();
-  const timer = setInterval(tick, 1000);
+  timer = setInterval(tick, 1000);
 
   let toastTimer;
   function showToast(msg){
