@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>선물이 도착했어요 🎁</title>
 <meta property="og:title" content="완강 기념 선물이 도착했어요 🎁">
-<meta property="og:description" content="영어 회화 과정을 완주한 수강생이 보내는 스터디언 클래스 20% 할인 쿠폰">
+<meta property="og:description" content="완강한 수강생이 보내는 스터디언 클래스 20% 할인 쿠폰">
 <meta property="og:image" content="https://studianclass.github.io/re/og-gift.png">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -14,7 +14,7 @@
   /* =====================================================================
      ★ 선물 수신자 화면 (화면 B) — re/index.html ★
      링크 형식 (완강자 화면 버튼이 자동 생성, 짧은 형식):
-       인강 20% : https://studianclass.github.io/re/?c=쿠폰번호&e=20260905
+       인강 20% : https://studianclass.github.io/re/?c=쿠폰번호&e=260905  (YYMMDD 또는 YYYYMMDD)
        단어 30% : https://studianclass.github.io/re/?c=쿠폰번호&e=20260905&t=v
      - t=v 가 있으면 영어독립단어(블루) 버전, 없으면 인강(골드) 버전
      - 이전 형식(?code=&exp=)도 계속 동작함
@@ -262,8 +262,9 @@
 
   /* ── 유효기간: ?exp=YYYYMMDD → KST 23:59:59 ── */
   function resolveDeadline(){
-    const raw = (params.get("e") || params.get("exp") || "").trim().replace(/[.\/]/g,"-");
-    const m = raw.match(/^(\d{4})-?(\d{2})-?(\d{2})$/);
+    let raw = (params.get("e") || params.get("exp") || "").trim().replace(/[.\/-]/g,"");
+    if(/^\d{6}$/.test(raw)) raw = "20" + raw;   // YYMMDD 도 허용
+    const m = raw.match(/^(\d{4})(\d{2})(\d{2})$/);
     if(m){
       const t = new Date(m[1]+"-"+m[2]+"-"+m[3]+"T23:59:59+09:00").getTime();
       if(!isNaN(t)) return { ts:t, y:+m[1], mo:+m[2], d:+m[3] };
