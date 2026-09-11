@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>선물이 도착했어요 🎁</title>
+<meta property="og:title" content="완강 기념 선물이 도착했어요 🎁">
+<meta property="og:description" content="영어 회화 과정을 완주한 수강생이 보내는 스터디언 클래스 20% 할인 쿠폰">
+<meta property="og:image" content="https://studianclass.github.io/re/og-gift.png">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
@@ -115,9 +119,14 @@
     color:#8A6A22;box-shadow:none;
   }
   body.is-voca .btn--share{background:#EFF3FF;border-color:var(--blue);color:var(--blue-deep)}
-  .btn--share .share-main{font-size:16px;font-weight:800}
+  .btn--share .share-main{font-size:16px;font-weight:800;display:flex;align-items:center;gap:7px}
+  .btn--share .kk{width:22px;height:22px;border-radius:5px;display:block}
   .btn--share .share-sub{font-size:11.5px;font-weight:700;opacity:.8}
   .btn--share.is-done{background:var(--ok);border-color:var(--ok);color:#fff}
+  .btn--share.is-kakao{background:#FEE500;border-color:#FEE500;color:#191919}
+  .btn--share .ic{position:static;transform:none;margin-left:6px}
+  .btn--link{background:transparent;color:#7A83A6;font-size:12.5px;font-weight:700;padding:4px 8px 10px;margin:-4px 0 4px;box-shadow:none;text-decoration:underline;text-underline-offset:3px}
+  .btn--link.is-done{color:var(--ok)}
 
   .how{margin:12px 4px 0}
   .how__t{font-size:12.5px;font-weight:800;color:#3A4770;margin:0 0 5px}
@@ -173,10 +182,11 @@
           <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
         </a>
 
-        <button class="btn btn--share" id="shareBtn">
-          <span class="share-main">🎁 선물하기</span>
-          <span class="share-sub">(클릭하여 복사 된 링크를 전달해 주세요)</span>
+        <button class="btn btn--share is-kakao" id="shareBtn">
+          <span class="share-main">🎁 카카오톡으로 선물하기 <img class="kk" src="data:image/png;base64,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" alt="카카오톡"></span>
+          <span class="share-sub">(이 쿠폰을 다른 분께 양보하고 싶다면)</span>
         </button>
+        <button class="btn btn--link" id="linkBtn">카카오톡이 안 열리면 · 링크만 복사하기</button>
 
         <div class="how">
           <p class="how__t">＊ 쿠폰 사용 방법</p>
@@ -202,12 +212,15 @@
 
   <div class="toast" id="toast">복사됐어요 ✓</div>
 
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js" crossorigin="anonymous"></script>
 <script>
   /* ===================== 설정 ===================== */
   const CONFIG = {
     classRegisterUrl: "https://www.studianclass.com/sub/myPage/goCouponUserList",  // 인강: 쿠폰 등록 페이지
     vocaRegisterUrl : "https://youngdok.com/membership",   // 영어독립단어: 쿠폰 등록 페이지
-    logUrl: "",                                      // 클릭 기록용 Apps Script URL (추후 연결)
+    logUrl: "https://script.google.com/macros/s/AKfycbwgVAt2cm3Xw7oWJ5Nu6w7vN7zdGf-O4jU8TwqJgqX1Ysk7SMu9ChrjAYbO5pYchUIqIQ/exec",  // 클릭 기록 Apps Script 웹앱 URL
+    kakaoJsKey: "YOUR_KAKAO_JAVASCRIPT_KEY",        // developers.kakao.com > 앱 > 앱 키 > JavaScript 키
+    shareImage: "https://studianclass.github.io/re/og-gift.png",
     defaultCode: "TEST12341234",
     deadlineISO: "2026-12-31T23:59:59+09:00"
   };
@@ -273,9 +286,9 @@
   goBtn.href = isVoca ? CONFIG.vocaRegisterUrl : CONFIG.classRegisterUrl;
 
   /* ── 클릭 기록 (logUrl 설정 시에만 동작) ── */
-  function logEvent(button){
+  function logEvent(button, method){
     if(!CONFIG.logUrl) return;
-    const payload = JSON.stringify({ page:"recipient", button, code:rawCode, type:TYPE, exp:expLabel, via:(isReshare?"reshare":"direct"), self:(isSelf?1:0), ts:new Date().toISOString(), ua:navigator.userAgent });
+    const payload = JSON.stringify({ page:"recipient", button, code:rawCode, type:TYPE, exp:expLabel, via:(isReshare?"reshare":"direct"), self:(isSelf?1:0), method:(method||""), ts:new Date().toISOString(), ua:navigator.userAgent });
     try{
       const blob = new Blob([payload], {type:"text/plain;charset=UTF-8"});
       if(navigator.sendBeacon && navigator.sendBeacon(CONFIG.logUrl, blob)) return;
@@ -331,23 +344,58 @@
     }else{ showToast("번호를 길게 눌러 복사해 주세요"); }
   });
 
-  /* ── 선물하기: 이 페이지 링크를 복사해 지인에게 전달 (재선물 표시 r=1 포함) ── */
-  const shareBtn = document.getElementById("shareBtn");
-  shareBtn.addEventListener("click", async ()=>{
-    logEvent("share");
+  /* ── 선물하기: 카카오톡 공유(SDK) → 실패 시 링크 복사 (재선물 표시 r=1 포함) ── */
+  let kakaoReady = false;
+  try{
+    if(window.Kakao && CONFIG.kakaoJsKey && CONFIG.kakaoJsKey !== "YOUR_KAKAO_JAVASCRIPT_KEY"){
+      if(!Kakao.isInitialized()) Kakao.init(CONFIG.kakaoJsKey);
+      kakaoReady = Kakao.isInitialized();
+    }
+  }catch(e){ kakaoReady = false; }
+
+  function reshareUrl(){
     const u = new URL(location.href);
     u.searchParams.set("r","1");
-    const ok = await copyText(u.origin + u.pathname + "?" + u.searchParams.toString());
+    return u.origin + u.pathname + "?" + u.searchParams.toString();
+  }
+  function kakaoShare(url){
+    Kakao.Share.sendDefault({
+      objectType: "feed",
+      content: {
+        title: "완강 기념 선물이 도착했어요 🎁",
+        description: (isVoca ? "영어독립단어 30% 할인 쿠폰" : "스터디언 클래스 영어회화 강의 20% 할인 쿠폰") + " · " + expLabel,
+        imageUrl: CONFIG.shareImage,
+        imageWidth: 1200, imageHeight: 630,
+        link: { mobileWebUrl: url, webUrl: url }
+      },
+      buttons: [{ title: "선물 열어보기", link: { mobileWebUrl: url, webUrl: url } }]
+    });
+  }
+
+  const shareBtn = document.getElementById("shareBtn");
+  const linkBtn  = document.getElementById("linkBtn");
+  const KK_IMG = shareBtn.querySelector(".kk") ? shareBtn.querySelector(".kk").outerHTML : "";
+  shareBtn.addEventListener("click", async ()=>{
     try{ localStorage.setItem("sent_" + rawCode, "1"); }catch(e){}
+    if(kakaoReady){
+      logEvent("share", "kakao");
+      try{ kakaoShare(reshareUrl()); return; }catch(e){}
+    }
+    logEvent("share", "copy");
+    const ok = await copyText(reshareUrl());
     if(ok){
       shareBtn.classList.add("is-done");
       shareBtn.querySelector(".share-main").textContent = "선물 링크 복사 완료 ✓";
       showToast("선물 링크가 복사됐어요. 카톡에 붙여넣어 전해 주세요 🎁");
-      setTimeout(()=>{
-        shareBtn.classList.remove("is-done");
-        shareBtn.querySelector(".share-main").textContent = "🎁 선물하기";
-      }, 2600);
+      setTimeout(()=>{ shareBtn.classList.remove("is-done"); shareBtn.querySelector(".share-main").innerHTML = "🎁 카카오톡으로 선물하기 " + KK_IMG; }, 2600);
     }else{ showToast("복사에 실패했어요. 다시 눌러 주세요"); }
+  });
+  linkBtn.addEventListener("click", async ()=>{
+    logEvent("share", "copy");
+    try{ localStorage.setItem("sent_" + rawCode, "1"); }catch(e){}
+    const ok = await copyText(reshareUrl());
+    if(ok){ linkBtn.classList.add("is-done"); linkBtn.textContent = "링크 복사 완료 ✓ 카톡에 붙여넣어 주세요"; showToast("선물 링크가 복사됐어요 🎁"); }
+    else showToast("복사에 실패했어요. 다시 눌러 주세요");
   });
 
   /* ── 선물 개봉 콘페티 (짧고 은은하게, 약 1.8초) ── */
