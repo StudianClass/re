@@ -4,15 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>완강 축하 선물함 · 스터디언 클래스</title>
+<meta property="og:title" content="완강 축하 선물함 · 스터디언 클래스">
+<meta property="og:description" content="완강 기념으로 지인에게 선물할 수 있는 20% 할인 쿠폰 2장이 준비됐어요.">
+<meta property="og:image" content="https://studianclass.github.io/re/og-gift.png">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
   /* =====================================================================
      ★ 완강자용 선물함 (화면 A) — "졸업식 밤" 네이비 & 골드 ★
      알림톡 링크 형식 (압축형):
-       https://studianclass.github.io/re/gift/?k=인강쿠폰1.인강쿠폰2&exp=20260905
+       https://studianclass.github.io/re/gift/?k=인강쿠폰1.인강쿠폰2&e=20260905
      - k   : 인강 쿠폰번호 2개를 점(.)으로 연결
-     - exp : 유효기간 (YYYYMMDD) → KST 23:59:59 (완강일 기준, 사람마다 다름)
+     - e   : 유효기간 (YYYYMMDD) ※ 이전 exp= 도 계속 동작 → KST 23:59:59 (완강일 기준, 사람마다 다름)
      ※ 이전 형식(?c1=&c2=&v=)도 계속 동작함
      선물 버튼 클릭 → 수신자 화면 링크 자동 생성·복사
        {reBase}?c=쿠폰번호&e=YYYYMMDD
@@ -120,6 +124,10 @@
     color:#fff;
     box-shadow:0 8px 20px rgba(30,80,255,.35);
   }
+  .btn--kakao{background:#FEE500;color:#191919;box-shadow:0 8px 20px rgba(254,229,0,.22)}
+  .btn .kk{width:22px;height:22px;border-radius:5px;flex:0 0 auto;display:block}
+  .btn--link{background:transparent;color:#7A83A6;font-size:12.5px;font-weight:700;padding:4px 8px 10px;margin:-4px 0 4px;box-shadow:none;text-decoration:underline;text-underline-offset:3px}
+  .btn--link.is-done{color:var(--ok)}
   .btn .ic{display:flex}
   .btn .ic svg{width:18px;height:18px}
   .btn.is-done{background:var(--ok);color:#fff;box-shadow:0 8px 18px rgba(47,169,122,.35)}
@@ -167,15 +175,17 @@
         <span class="group__count">2장</span>
       </div>
       <p class="group__desc">영어회화, 혼자보다 둘이 오래 갑니다.</p>
-      <button class="btn btn--class" id="giftC1" data-key="gift_c1">
-        친구 1에게 선물 링크 보내기
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
+      <button class="btn btn--kakao" id="giftC1" data-key="gift_c1">
+        친구 1에게 카카오톡으로 선물 공유하기
+        <img class="kk" src="data:image/png;base64,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" alt="카카오톡">
       </button>
-      <button class="btn btn--class" id="giftC2" data-key="gift_c2">
-        친구 2에게 선물 링크 보내기
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
+      <button class="btn btn--link" id="linkC1">카카오톡이 안 열리면 · 링크만 복사하기</button>
+      <button class="btn btn--kakao" id="giftC2" data-key="gift_c2">
+        친구 2에게 카카오톡으로 선물 공유하기
+        <img class="kk" src="data:image/png;base64,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" alt="카카오톡">
       </button>
-      <p class="hint">버튼을 누르면 링크가 복사됩니다. 카카오톡에 붙여넣어 전해 주세요.</p>
+      <button class="btn btn--link" id="linkC2">카카오톡이 안 열리면 · 링크만 복사하기</button>
+      <p class="hint">버튼을 누르면 카카오톡 친구 선택 화면이 열립니다. 쿠폰 1장당 한 분께만 전해 주세요.</p>
     </section>
 
     <div class="count" id="count">
@@ -192,11 +202,14 @@
 
   <div class="toast" id="toast">복사됐어요 ✓</div>
 
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js" crossorigin="anonymous"></script>
 <script>
   /* ===================== 설정 ===================== */
   const CONFIG = {
     reBase: "https://studianclass.github.io/re/",   // 수신자 화면 주소
-    logUrl: "",                                      // 클릭 기록용 Apps Script URL (추후 연결)
+    kakaoJsKey: "YOUR_KAKAO_JAVASCRIPT_KEY",        // developers.kakao.com > 앱 > 앱 키 > JavaScript 키
+    shareImage: "https://studianclass.github.io/re/og-gift.png",  // 카톡 공유 카드 이미지 (1200x630)
+    logUrl: "https://script.google.com/macros/s/AKfycbwgVAt2cm3Xw7oWJ5Nu6w7vN7zdGf-O4jU8TwqJgqX1Ysk7SMu9ChrjAYbO5pYchUIqIQ/exec",  // 클릭 기록 Apps Script 웹앱 URL
     sample: { c1:"CLASS111AAAA", c2:"CLASS222BBBB" },  // 테스트용
     deadlineISO: "2026-12-31T23:59:59+09:00"
   };
@@ -212,7 +225,7 @@
   };
 
   function resolveDeadline(){
-    const raw = (params.get("exp") || "").trim().replace(/[.\/]/g,"-");
+    const raw = (params.get("e") || params.get("exp") || "").trim().replace(/[.\/]/g,"-");
     const m = raw.match(/^(\d{4})-?(\d{2})-?(\d{2})$/);
     if(m){
       const t = new Date(m[1]+"-"+m[2]+"-"+m[3]+"T23:59:59+09:00").getTime();
@@ -226,16 +239,16 @@
   const WEEK = ["일","월","화","수","목","금","토"];
   const expLabel = DL.mo+"/"+DL.d+"("+WEEK[new Date(Date.UTC(DL.y,DL.mo-1,DL.d)).getUTCDay()]+") 23:59까지";
 
-  function logEvent(button, code, type){
+  function logEvent(button, code, type, method){
     if(!CONFIG.logUrl) return;
-    const payload = JSON.stringify({ page:"owner", button, code, type, exp:expLabel, ts:new Date().toISOString(), ua:navigator.userAgent });
+    const payload = JSON.stringify({ page:"owner", button, code, type, method:(method||""), exp:expLabel, ts:new Date().toISOString(), ua:navigator.userAgent });
     try{
       const blob = new Blob([payload], {type:"text/plain;charset=UTF-8"});
       if(navigator.sendBeacon && navigator.sendBeacon(CONFIG.logUrl, blob)) return;
     }catch(e){}
     try{ fetch(CONFIG.logUrl, {method:"POST", mode:"no-cors", keepalive:true, headers:{"Content-Type":"text/plain;charset=UTF-8"}, body:payload}); }catch(e){}
   }
-  logEvent("page_view","","");
+  logEvent("page_view", CODES.c1 + "." + CODES.c2, "class20");  // 어떤 쿠폰쌍의 완강자가 열었는지 기록
 
   function giftLink(code, isVoca){
     let url = CONFIG.reBase + "?c=" + encodeURIComponent(code) + "&e=" + DL.raw;
@@ -260,23 +273,62 @@
     clearTimeout(toastTimer); toastTimer = setTimeout(()=>toast.classList.remove("show"), 2200);
   }
 
-  function bindGift(btnId, code, isVoca, key, type){
-    const btn = document.getElementById(btnId);
-    btn.addEventListener("click", async ()=>{
-      logEvent(key, code, type);
-      const ok = await copyText(giftLink(code, isVoca));
-      try{ localStorage.setItem("sent_" + code, "1"); }catch(e){}
-      if(ok){
-        btn.classList.add("is-done");
-        btn.firstChild.textContent = "선물 링크 복사 완료 ";
-        showToast("선물 링크가 복사됐어요. 카톡에 붙여넣기 하세요 🎁");
-      }else{
-        showToast("복사에 실패했어요. 다시 눌러 주세요");
-      }
+  /* ── 카카오 SDK 초기화 (키가 없으면 링크 복사로 자동 대체) ── */
+  let kakaoReady = false;
+  try{
+    if(window.Kakao && CONFIG.kakaoJsKey && CONFIG.kakaoJsKey !== "YOUR_KAKAO_JAVASCRIPT_KEY"){
+      if(!Kakao.isInitialized()) Kakao.init(CONFIG.kakaoJsKey);
+      kakaoReady = Kakao.isInitialized();
+    }
+  }catch(e){ kakaoReady = false; }
+
+  function kakaoShare(url){
+    Kakao.Share.sendDefault({
+      objectType: "feed",
+      content: {
+        title: "완강 기념 선물이 도착했어요 🎁",
+        description: "스터디언 클래스 영어회화 강의 20% 할인 쿠폰 · " + expLabel,
+        imageUrl: CONFIG.shareImage,
+        imageWidth: 1200, imageHeight: 630,
+        link: { mobileWebUrl: url, webUrl: url }
+      },
+      buttons: [{ title: "선물 열어보기", link: { mobileWebUrl: url, webUrl: url } }]
     });
   }
-  bindGift("giftC1", CODES.c1, false, "gift_c1", "class20");
-  bindGift("giftC2", CODES.c2, false, "gift_c2", "class20");
+
+  function markDone(btn, label){
+    btn.classList.add("is-done");
+    btn.firstChild.textContent = label + " ";
+  }
+
+  function bindGift(btnId, linkId, code, isVoca, key, type){
+    const btn = document.getElementById(btnId);
+    const lnk = document.getElementById(linkId);
+    const url = giftLink(code, isVoca);
+
+    btn.addEventListener("click", async ()=>{
+      try{ localStorage.setItem("sent_" + code, "1"); }catch(e){}
+      if(kakaoReady){
+        logEvent(key, code, type, "kakao");
+        try{ kakaoShare(url); markDone(btn, "카카오톡으로 공유했어요 ✓"); return; }catch(e){}
+      }
+      /* SDK 없음/실패 → 링크 복사로 대체 */
+      logEvent(key, code, type, "copy");
+      const ok = await copyText(url);
+      if(ok){ markDone(btn, "선물 링크 복사 완료 "); showToast("선물 링크가 복사됐어요. 카톡에 붙여넣기 하세요 🎁"); }
+      else showToast("복사에 실패했어요. 다시 눌러 주세요");
+    });
+
+    lnk.addEventListener("click", async ()=>{
+      logEvent(key, code, type, "copy");
+      try{ localStorage.setItem("sent_" + code, "1"); }catch(e){}
+      const ok = await copyText(url);
+      if(ok){ lnk.classList.add("is-done"); lnk.textContent = "링크 복사 완료 ✓ 카톡에 붙여넣어 주세요"; showToast("선물 링크가 복사됐어요 🎁"); }
+      else showToast("복사에 실패했어요. 다시 눌러 주세요");
+    });
+  }
+  bindGift("giftC1", "linkC1", CODES.c1, false, "gift_c1", "class20");
+  bindGift("giftC2", "linkC2", CODES.c2, false, "gift_c2", "class20");
 
   const timeEl = document.getElementById("time");
   document.getElementById("until").textContent = "유효기간 · " + expLabel + " (한국시간)";
