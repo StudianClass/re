@@ -14,9 +14,10 @@
   /* =====================================================================
      ★ 완강자용 선물함 (화면 A) — "졸업식 밤" 네이비 & 골드 ★
      알림톡 링크 형식 (압축형):
-       https://studianclass.github.io/re/gift/?k=인강쿠폰1.인강쿠폰2&e=20260905
+       https://studianclass.github.io/re/gift/?k=인강쿠폰1.인강쿠폰2&e=260905
+       (더 짧게) https://studianclass.github.io/re/gift/?k=인강쿠폰1.인강쿠폰2.260905
      - k   : 인강 쿠폰번호 2개를 점(.)으로 연결
-     - e   : 유효기간 (YYYYMMDD) ※ 이전 exp= 도 계속 동작 → KST 23:59:59 (완강일 기준, 사람마다 다름)
+     - e   : 유효기간 YYMMDD 또는 YYYYMMDD (k 끝에 .YYMMDD 로 붙여도 됨) ※ 이전 exp= 도 계속 동작 → KST 23:59:59 (완강일 기준, 사람마다 다름)
      ※ 이전 형식(?c1=&c2=&v=)도 계속 동작함
      선물 버튼 클릭 → 수신자 화면 링크 자동 생성·복사
        {reBase}?c=쿠폰번호&e=YYYYMMDD
@@ -218,15 +219,20 @@
   const params = new URLSearchParams(location.search);
   const clean  = s => (s||"").trim().toUpperCase().replace(/\s+/g,"");
   /* k=인강1.인강2.단어 (점으로 구분) 우선, 없으면 이전 형식 c1/c2/v, 그마저 없으면 샘플 */
-  const kParts = (params.get("k")||"").split(".").map(clean);
+  /* k=코드1.코드2 또는 k=코드1.코드2.YYMMDD (날짜를 k 안에 붙이면 &e= 생략 가능) */
+  const kParts = (params.get("k")||"").split(".").map(clean).filter(Boolean);
+  let kDate = "";
+  if(kParts.length >= 3 && /^\d{6}$|^\d{8}$/.test(kParts[kParts.length-1])) kDate = kParts.pop();
   const CODES = {
     c1: kParts[0] || clean(params.get("c1")) || CONFIG.sample.c1,
     c2: kParts[1] || clean(params.get("c2")) || CONFIG.sample.c2
   };
 
   function resolveDeadline(){
-    const raw = (params.get("e") || params.get("exp") || "").trim().replace(/[.\/]/g,"-");
-    const m = raw.match(/^(\d{4})-?(\d{2})-?(\d{2})$/);
+    /* e=YYYYMMDD 또는 e=YYMMDD (6자리면 20xx로 해석) — k 끝에 붙인 날짜도 동일 처리 */
+    let raw = (params.get("e") || params.get("exp") || kDate || "").trim().replace(/[.\/-]/g,"");
+    if(/^\d{6}$/.test(raw)) raw = "20" + raw;
+    const m = raw.match(/^(\d{4})(\d{2})(\d{2})$/);
     if(m){
       const t = new Date(m[1]+"-"+m[2]+"-"+m[3]+"T23:59:59+09:00").getTime();
       if(!isNaN(t)) return { ts:t, y:+m[1], mo:+m[2], d:+m[3], raw:m[1]+m[2]+m[3] };
@@ -251,7 +257,7 @@
   logEvent("page_view", CODES.c1 + "." + CODES.c2, "class20");  // 어떤 쿠폰쌍의 완강자가 열었는지 기록
 
   function giftLink(code, isVoca){
-    let url = CONFIG.reBase + "?c=" + encodeURIComponent(code) + "&e=" + DL.raw;
+    let url = CONFIG.reBase + "?c=" + encodeURIComponent(code) + "&e=" + DL.raw.slice(2);  // YYMMDD
     if(isVoca) url += "&t=v";
     return url;
   }
