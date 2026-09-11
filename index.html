@@ -347,7 +347,7 @@
   /* ── 선물하기: 카카오톡 공유(SDK) → 실패 시 링크 복사 (재선물 표시 r=1 포함) ── */
   let kakaoReady = false;
   try{
-    if(window.Kakao && CONFIG.kakaoJsKey && CONFIG.kakaoJsKey !== "YOUR_KAKAO_JAVASCRIPT_KEY"){
+    if(window.Kakao && CONFIG.kakaoJsKey && CONFIG.kakaoJsKey !== "687dc439967f4f625afa84fe2bb547c7"){
       if(!Kakao.isInitialized()) Kakao.init(CONFIG.kakaoJsKey);
       kakaoReady = Kakao.isInitialized();
     }
